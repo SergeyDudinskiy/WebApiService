@@ -27,9 +27,9 @@ namespace WebApiService.Mutaties
             if (book != null)
             {
                 dbContext.Books.Remove(book);
+                await dbContext.SaveChangesAsync();
             }
-
-            await dbContext.SaveChangesAsync();
+            
             return null;
         }
 
@@ -71,9 +71,9 @@ namespace WebApiService.Mutaties
             if (reader != null)
             {
                 dbContext.Readers.Remove(reader);
+                await dbContext.SaveChangesAsync();
             }
-
-            await dbContext.SaveChangesAsync();
+            
             return null;
         }
 
@@ -93,7 +93,7 @@ namespace WebApiService.Mutaties
             return reader;
         }
 
-        public async Task<BooksInReaders> BooksInReaders([Service] DataDbContext dbContext, int readerId, int bookId)
+        public async Task<BooksInReaders> AddBooksInReaders([Service] DataDbContext dbContext, int readerId, int bookId)
         {
             var booksInReaders = new BooksInReaders
             {
