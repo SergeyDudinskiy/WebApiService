@@ -33,6 +33,24 @@ namespace WebApiService.Mutaties
             return null;
         }
 
+        public async Task<Book> UpdateBook([Service] DataDbContext dbContext, int id, string title, int pages, string author, int chapters)
+        {
+            var book = dbContext.Books.FirstOrDefault(x => x.Id == id);
+
+            if (book != null)
+            {
+                book.Title = title;
+                book.Chapters = chapters;
+                book.Pages = pages;
+                book.Author = new Author { Name = author };
+
+                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
+            }
+
+            return book;
+        }
+
         public async Task<Reader> AddReader([Service] DataDbContext dbContext, string firstname, string lastname)
         {
             var reader = new Reader
@@ -59,6 +77,22 @@ namespace WebApiService.Mutaties
             return null;
         }
 
+        public async Task<Reader> UpdateReader([Service] DataDbContext dbContext, int id, string firstname, string lastname)
+        {
+            var reader = dbContext.Readers.FirstOrDefault(x => x.Id == id);
+
+            if (reader != null)
+            {
+                reader.Firstname = firstname;
+                reader.Lastname = lastname;                
+
+                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
+            }
+
+            return reader;
+        }
+
         public async Task<BooksInReaders> BooksInReaders([Service] DataDbContext dbContext, int readerId, int bookId)
         {
             var booksInReaders = new BooksInReaders
@@ -83,6 +117,22 @@ namespace WebApiService.Mutaties
 
             await dbContext.SaveChangesAsync();
             return null;
+        }
+
+        public async Task<BooksInReaders> UpdateBooksInReaders([Service] DataDbContext dbContext, int id, int readerId, int bookId)
+        {
+            var booksInReaders = dbContext.BooksInReaders.FirstOrDefault(x => x.Id == id);
+
+            if (booksInReaders != null)
+            {
+                booksInReaders.ReaderId = readerId;
+                booksInReaders.BookId = bookId;
+
+                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
+            }
+
+            return booksInReaders;
         }
     }
 }
