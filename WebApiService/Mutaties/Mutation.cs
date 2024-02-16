@@ -109,9 +109,9 @@ namespace WebApiService.Mutaties
             if (booksInReaders != null)
             {
                 dbContext.BooksInReaders.Remove(booksInReaders);
+                await dbContext.SaveChangesAsync();
             }
-
-            await dbContext.SaveChangesAsync();
+            
             return null;
         }
 
