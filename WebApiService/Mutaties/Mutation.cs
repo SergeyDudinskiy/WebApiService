@@ -42,9 +42,7 @@ namespace WebApiService.Mutaties
                 book.Title = title;
                 book.Chapters = chapters;
                 book.Pages = pages;
-                book.Author = new Author { Name = author };
-
-                dbContext.SaveChanges();
+                book.Author = new Author { Name = author };               
                 await dbContext.SaveChangesAsync();
             }
 
@@ -84,9 +82,7 @@ namespace WebApiService.Mutaties
             if (reader != null)
             {
                 reader.Firstname = firstname;
-                reader.Lastname = lastname;                
-
-                dbContext.SaveChanges();
+                reader.Lastname = lastname;                  
                 await dbContext.SaveChangesAsync();
             }
 
@@ -126,9 +122,7 @@ namespace WebApiService.Mutaties
             if (booksInReaders != null)
             {
                 booksInReaders.ReaderId = readerId;
-                booksInReaders.BookId = bookId;
-
-                dbContext.SaveChanges();
+                booksInReaders.BookId = bookId;                
                 await dbContext.SaveChangesAsync();
             }
 
